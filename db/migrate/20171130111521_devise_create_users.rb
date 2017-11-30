@@ -33,6 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       ## Other user fields
       t.string :f_name
       t.string :l_name
+      t.string :profile_pic
       t.date :DOB
       t.integer :phone
       t.boolean :admin, null: false, default: false
