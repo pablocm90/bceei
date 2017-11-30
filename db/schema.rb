@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(version: 20171130114001) do
     t.string   "f_name"
     t.string   "l_name"
     t.string   "profile_pic"
-    t.date     "DOB"
-    t.integer  "phone"
+    t.date     "dob"
+    t.string   "phone"
     t.boolean  "admin",                  default: false, null: false
     t.boolean  "coach",                  default: false
     t.boolean  "player",                 default: true
