@@ -37,6 +37,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.date :DOB
       t.integer :phone
       t.boolean :admin, null: false, default: false
+      t.boolean :coach, default: false
+      t.boolean :player, default: true
+      t.boolean :parent, default: false
 
 
       t.timestamps null: false
