@@ -1,0 +1,2 @@
+class BuvetteItem < ApplicationRecord
+end
