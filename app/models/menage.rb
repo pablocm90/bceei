@@ -1,4 +1,5 @@
 class Menage < ApplicationRecord
-  belongs_to :parent
-  belongs_to :player
+  has_many :parents
+  has_many :players
+
 end

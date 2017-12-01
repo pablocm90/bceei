@@ -4,18 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   after_create :generate_coach_player_parent
+  has_one :player
+  has_one :coach
+  has_one :parent
 
   private
 
   def generate_coach_player_parent
-    if parent
+    if is_parent
       Parent.create(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone, user: self)
     end
-    if player
-      menage = Menage.create()
-      Player.create(user: self, menage_id: menage.id)
+    if is_player
+      player = Player.new(user: self)
+      player.save
     end
-    if coach
+    if is_coach
       Coach.create(user: self)
     end
   end

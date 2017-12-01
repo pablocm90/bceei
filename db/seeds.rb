@@ -26,25 +26,25 @@ counter = 0
   params[:dob] = Faker::Date.birthday(5, 65)
   params[:phone] = "45612315"
   if counter == 20
-    params[:admin] = true
-    params[:coach] = true
-    params[:player] = true
-    params[:parent] = true
+    params[:is_admin] = true
+    params[:is_coach] = true
+    params[:is_player] = true
+    params[:is_parent] = true
     User.create(params)
   elsif counter % 5 == 0
-    params[:parent] = true
-    params[:player] = false
+    params[:is_parent] = true
+    params[:is_player] = false
     User.create(params)
   elsif counter == 19
-    params[:admin] = true
-    params[:player] = false
+    params[:is_admin] = true
+    params[:is_player] = false
     User.create(params)
   elsif counter == 18
-    params[:coach] = true
-    params[:player] = false
+    params[:is_coach] = true
+    params[:is_player] = false
     User.create(params)
   else
-    params[:player] = true
+    params[:is_player] = true
     User.create(params)
   end
 end

@@ -36,10 +36,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :profile_pic
       t.date :dob
       t.string :phone
-      t.boolean :admin, null: false, default: false
-      t.boolean :coach, default: false
-      t.boolean :player, default: true
-      t.boolean :parent, default: false
+      t.boolean :is_admin, null: false, default: false
+      t.boolean :is_coach, default: false
+      t.boolean :is_player, default: true
+      t.boolean :is_parent, default: false
+      t.boolean :is_active, default: true
 
 
       t.timestamps null: false

@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   #   flash[:alert] = "You are not authorized to perform this action."
   #   redirect_to(root_path)
   # end
+  attr_accessor :current_parent, :current_player, :current_coach, :current_admin
+  helper_method :current_parent, :current_player, :current_coach, :current_admin
 
   private
 
@@ -25,15 +27,15 @@ class ApplicationController < ActionController::Base
   end
 
   def current_player
-    @current_parent ||= current_user.try(:player)
+    @current_player ||= current_user.try(:player)
   end
 
   def current_coach
-    @current_parent ||= current_user.try(:coach)
+    @current_coach ||= current_user.try(:coach)
   end
 
   def current_admin
-    @current_profile ||= current_user.try(:admin)
+    @current_admin ||= current_user.try(:admin)
   end
 
 end
