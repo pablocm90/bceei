@@ -1,0 +1,2 @@
+class CoachingStaff < ApplicationRecord
+end
