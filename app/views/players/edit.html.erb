@@ -1,15 +1,4 @@
 <%= simple_form_for current_player, url: players_path do |f| %>
-  <%= f.simple_fields_for :user do |uf| %>
-    <%= uf.input :f_name, label: "Prénom" %>
-    <%= uf.input :l_name, label: "Nom(s)" %>
-    <%= uf.input :dob, label: "Date de naissance", as: :date, start_year: Date.today.year - 70,
-                              end_year: Date.today.year - 4,
-                              order: [:day, :month, :year] %>
-    <%= uf.input :phone, label: "Numero de telephone", as: :tel %>
-    <%= uf.input :is_coach, label: "Je suis coach d'une equipe a l'ecole", as: :boolean %>
-    <%= uf.input :is_player, label: "Je suis un joueur dans une equipe de l'ecole", as: :boolean %>
-    <%= uf.input :is_parent, label: "Je suis le parent d'un joueur", as: :boolean %>
-  <% end %>
   <%= f.input :short_size, label: "Taille short", collection: %w(164 xs s m l xl xxl)%>
   <%= f.input :shirt_size, label: "Taille T-shirt", collection: %w(164 xs s m l xl xxl)%>
   <%= f.submit %>

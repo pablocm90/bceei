@@ -10,6 +10,13 @@ class User < ApplicationRecord
 
   private
 
+  def update_parent
+    if is_parent
+      parent = current_user.parent.update(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone)
+      parent.save
+    end
+  end
+
   def generate_coach_player_parent
     if is_parent
       parent = Parent.create(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone)

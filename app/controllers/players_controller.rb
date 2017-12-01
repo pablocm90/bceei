@@ -7,10 +7,10 @@ class PlayersController < ApplicationController
   end
 
   def update
+    authorize @player
     current_player.short_size = player_params[:short_size]
     current_player.shirt_size = player_params[:shirt_size]
-    current_user.update(player_params[:user])
-    if current_player.save && current_user.save
+    if current_player.save
       redirect_to root_path
     else
       raise

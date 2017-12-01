@@ -9,6 +9,15 @@
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
+    <%= f.input :f_name, label: "Prénom" %>
+    <%= f.input :l_name, label: "Nom(s)" %>
+    <%= f.input :dob, label: "Date de naissance", as: :date, start_year: Date.today.year - 70,
+                              end_year: Date.today.year - 4,
+                              order: [:day, :month, :year] %>
+    <%= f.input :phone, label: "Numero de telephone", as: :tel %>
+    <%= f.input :is_coach, label: "Je suis coach d'une equipe a l'ecole", as: :boolean %>
+    <%= f.input :is_player, label: "Je suis un joueur dans une equipe de l'ecole", as: :boolean %>
+    <%= f.input :is_parent, label: "Je suis le parent d'un joueur", as: :boolean %>
 
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
     <%= f.input :password_confirmation, required: false %>
