@@ -168,9 +168,15 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.boolean  "is_player",              default: true
     t.boolean  "is_parent",              default: false
     t.boolean  "is_active",              default: true
+    t.integer  "coach_id"
+    t.integer  "player_id"
+    t.integer  "parent_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["coach_id"], name: "index_users_on_coach_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["parent_id"], name: "index_users_on_parent_id", using: :btree
+    t.index ["player_id"], name: "index_users_on_player_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
