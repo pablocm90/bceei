@@ -4,19 +4,34 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   after_create :generate_coach_player_parent
+  belongs_to :player, optional: true
+  belongs_to :coach, optional: true
+  belongs_to :parent, optional: true
 
   private
 
+  def update_parent
+    if is_parent
+      parent = current_user.parent.update(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone)
+      parent.save
+    end
+  end
+
   def generate_coach_player_parent
-    if parent
-      Parent.create(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone, user: self)
+    if is_parent
+      parent = Parent.create(f_name: self.f_name, l_name: self.l_name, email: self.email, phone: self.phone)
+      self.parent = parent
+      self.save
     end
-    if player
-      menage = Menage.create()
-      Player.create(user: self, menage_id: menage.id)
+    if is_player
+      player = Player.create(user: self)
+      self.player = player
+      self.save
     end
-    if coach
-      Coach.create(user: self)
+    if is_coach
+      coach = Coach.create(user: self)
+      self.coach = coach
+      self.save
     end
   end
 
