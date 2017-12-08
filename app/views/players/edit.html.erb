@@ -1,5 +1,7 @@
-<%= simple_form_for current_player, url: players_path do |f| %>
-  <%= f.input :short_size, label: "Taille short", collection: %w(164 xs s m l xl xxl)%>
-  <%= f.input :shirt_size, label: "Taille T-shirt", collection: %w(164 xs s m l xl xxl)%>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <%= simple_form_for current_player, url: players_path do |f| %>
+    <%= f.input :short_size, label: "Taille short", collection: %w(164 xs s m l xl xxl)%>
+    <%= f.input :shirt_size, label: "Taille T-shirt", collection: %w(164 xs s m l xl xxl)%>
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -13,7 +13,7 @@ class PlayersController < ApplicationController
     if current_player.save
       redirect_to root_path
     else
-      raise
+      render :edit
     end
   end
 
@@ -24,7 +24,7 @@ class PlayersController < ApplicationController
   end
 
   def player_params
-     params.require(:player).permit(:short_size, :shirt_size, {user_atributes: [:f_name, :l_name, :dob, :phone, :coach, :player, :parent]})
+     params.require(:player).permit(:short_size, :shirt_size)
   end
 
 end

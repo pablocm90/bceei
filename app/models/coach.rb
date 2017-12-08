@@ -1,4 +1,4 @@
 class Coach < ApplicationRecord
-has_one :user
-  belongs_to :coaching_staff
+  has_one :user
+  belongs_to :coach_functions
 end
