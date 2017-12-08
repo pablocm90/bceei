@@ -38,18 +38,20 @@ ActiveRecord::Schema.define(version: 20171201124734) do
   end
 
   create_table "coach_functions", force: :cascade do |t|
-    t.integer  "coach_id"
-    t.string   "coach_functions"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["coach_id"], name: "index_coach_functions_on_coach_id", using: :btree
+    t.integer  "team_id"
+    t.string   "coach_role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_coach_functions_on_team_id", using: :btree
   end
 
   create_table "coaches", force: :cascade do |t|
     t.string   "diplome"
     t.boolean  "pack_deal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "coach_function_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["coach_function_id"], name: "index_coaches_on_coach_function_id", using: :btree
   end
 
   create_table "fields", force: :cascade do |t|
@@ -125,10 +127,8 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.date     "before"
     t.date     "after"
     t.string   "name"
-    t.integer  "coach_function_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["coach_function_id"], name: "index_teams_on_coach_function_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -175,7 +175,8 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "coach_functions", "coaches"
+  add_foreign_key "coach_functions", "teams"
+  add_foreign_key "coaches", "coach_functions"
   add_foreign_key "games", "fields"
   add_foreign_key "games", "parents"
   add_foreign_key "games", "teams"
@@ -184,7 +185,6 @@ ActiveRecord::Schema.define(version: 20171201124734) do
   add_foreign_key "parents", "menages"
   add_foreign_key "players", "menages"
   add_foreign_key "players", "teams"
-  add_foreign_key "teams", "coach_functions"
   add_foreign_key "trainings", "fields"
   add_foreign_key "trainings", "teams"
 end

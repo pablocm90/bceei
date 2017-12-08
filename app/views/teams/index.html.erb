@@ -1,0 +1,13 @@
+<div class="container">
+  <ul class="list list-inline">
+    <% @teams.each do |team| %>
+      <li>
+        <%= team.name %>
+      </li>
+        <% team.coach_functions.each do |coach| %>
+          <li> <%= coach.coaches.first.user.f_name %> </li>
+          <li> <%= coach.coach_role %> </li>
+        <% end %>
+    <% end %>
+  </ul>
+</div>

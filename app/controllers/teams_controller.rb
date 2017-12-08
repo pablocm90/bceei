@@ -1,18 +1,19 @@
 class TeamsController < ApplicationController
-  before_action :set_team, except: [ :index ]
+  before_action :set_team
 
   def show
-    @coaches =
+
   end
 
   def index
+    policy_scope(Team)
     @teams = Team.all
   end
 
   private
 
   def set_team
-    Team.find(team_id = params[:id]) || @team = current_user.team
+    @team = Team.find(current_player.team_id)
   end
 
 end
