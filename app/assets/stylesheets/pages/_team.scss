@@ -1,0 +1,19 @@
+.team-cover {
+  height: calc(100% - 70px);
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  background-size: cover !important;
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.team {
+  text-align: center;
+  color: $light-gray;
+  h2 {
+    font-size: 80px;
+  }
+
+}
+
+
+#team-name{}

@@ -1,6 +1,10 @@
 class Team < ApplicationRecord
-  belongs_to :player
-  belongs_to :coaching_staff
+  belongs_to :player, optional: true
   has_many :games
   has_many :trainings
+  has_many :coach_functions
+
+  def players
+    Player.where(team_id: self.id)
+  end
 end

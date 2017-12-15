@@ -1,26 +1,28 @@
-<h2>Sign up</h2>
+<div class="container">
+  <h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-    <%= f.input :f_name, label: "Prénom" %>
-    <%= f.input :l_name, label: "Nom(s)" %>
-    <%= f.input :dob, label: "Date de naissance", as: :date, start_year: Date.today.year - 70,
-                              end_year: Date.today.year - 4,
-                              order: [:day, :month, :year] %>
-    <%= f.input :phone, label: "Numero de telephone", as: :tel %>
-    <%= f.input :is_coach, label: "Je suis coach d'une equipe a l'ecole", as: :boolean %>
-    <%= f.input :is_player, label: "Je suis un joueur dans une equipe de l'ecole", as: :boolean %>
-    <%= f.input :is_parent, label: "Je suis le parent d'un joueur", as: :boolean %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      <%= f.input :password_confirmation, required: true %>
+      <%= f.input :f_name, label: "Prénom" %>
+      <%= f.input :l_name, label: "Nom(s)" %>
+      <%= f.input :dob, label: "Date de naissance", as: :date, start_year: Date.today.year - 70,
+                                end_year: Date.today.year - 4,
+                                order: [:day, :month, :year] %>
+      <%= f.input :phone, label: "Numero de telephone", as: :tel %>
+      <%= f.input :is_coach, label: "Je suis coach d'une equipe a l'ecole", as: :boolean %>
+      <%= f.input :is_player, label: "Je suis un joueur dans une equipe de l'ecole", as: :boolean %>
+      <%= f.input :is_parent, label: "Je suis le parent d'un joueur", as: :boolean %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up" %>
+    </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

@@ -8,11 +8,13 @@
 
 
 p "erasing everything"
-
+User.delete_all
 Coach.delete_all
 Player.delete_all
 Menage.delete_all
 Parent.delete_all
+CoachFunction.delete_all
+Team.delete_all
 
 p "creating 20 users 1/5 are parents - 1 is a coach - 1 is an admin - 1 is coach player parent and admin"
 counter = 0
@@ -50,6 +52,42 @@ counter = 0
 end
 
 p "created #{counter} users"
+
+p User.all
+
+p Coach.all
+
+p "creating coaching staff"
+
+first_coach = Coach.first
+second_coach = Coach.last
+
+assistant = CoachFunction.create(coach_role: "assistant")
+head_coach = CoachFunction.create(coach_role: "head coach")
+
+first_coach.coach_function_id = assistant.id
+second_coach.coach_function_id = head_coach.id
+first_coach.save
+second_coach.save
+
+p "creating team"
+
+team = Team.new(name: "Test Team")
+team.save!
+
+p "assign coaches to teams"
+
+CoachFunction.all.each do |coach|
+  coach.team_id = team.id
+  coach.save
+end
+
+p "conecting players to team"
+
+Player.all.each do |player|
+  player.team_id = team.id
+  player.save!
+end
 
 
 

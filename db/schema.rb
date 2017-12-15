@@ -37,21 +37,21 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "coaches", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "coaching_staff_id"
-    t.boolean  "assistant"
-    t.string   "diplome"
-    t.boolean  "pack_deal"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["coaching_staff_id"], name: "index_coaches_on_coaching_staff_id", using: :btree
-    t.index ["user_id"], name: "index_coaches_on_user_id", using: :btree
-  end
-
-  create_table "coaching_staffs", force: :cascade do |t|
+  create_table "coach_functions", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "coach_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_coach_functions_on_team_id", using: :btree
+  end
+
+  create_table "coaches", force: :cascade do |t|
+    t.string   "diplome"
+    t.boolean  "pack_deal"
+    t.integer  "coach_function_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["coach_function_id"], name: "index_coaches_on_coach_function_id", using: :btree
   end
 
   create_table "fields", force: :cascade do |t|
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20171201124734) do
   end
 
   create_table "parents", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "menage_id"
     t.string   "f_name"
     t.string   "l_name"
@@ -99,21 +98,20 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menage_id"], name: "index_parents_on_menage_id", using: :btree
-    t.index ["user_id"], name: "index_parents_on_user_id", using: :btree
   end
 
   create_table "players", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "short_size"
     t.string   "shirt_size"
     t.boolean  "short",      default: false
     t.boolean  "shirt",      default: false
     t.boolean  "coti_paid",  default: false
     t.integer  "menage_id"
+    t.integer  "team_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["menage_id"], name: "index_players_on_menage_id", using: :btree
-    t.index ["user_id"], name: "index_players_on_user_id", using: :btree
+    t.index ["team_id"], name: "index_players_on_team_id", using: :btree
   end
 
   create_table "shop_items", force: :cascade do |t|
@@ -126,14 +124,11 @@ ActiveRecord::Schema.define(version: 20171201124734) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.integer  "player_id"
     t.date     "before"
     t.date     "after"
-    t.integer  "coaching_staff_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["coaching_staff_id"], name: "index_teams_on_coaching_staff_id", using: :btree
-    t.index ["player_id"], name: "index_teams_on_player_id", using: :btree
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -180,19 +175,16 @@ ActiveRecord::Schema.define(version: 20171201124734) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "coaches", "coaching_staffs"
-  add_foreign_key "coaches", "users"
+  add_foreign_key "coach_functions", "teams"
+  add_foreign_key "coaches", "coach_functions"
   add_foreign_key "games", "fields"
   add_foreign_key "games", "parents"
   add_foreign_key "games", "teams"
   add_foreign_key "orders", "shop_items"
   add_foreign_key "orders", "users"
   add_foreign_key "parents", "menages"
-  add_foreign_key "parents", "users"
   add_foreign_key "players", "menages"
-  add_foreign_key "players", "users"
-  add_foreign_key "teams", "coaching_staffs"
-  add_foreign_key "teams", "players"
+  add_foreign_key "players", "teams"
   add_foreign_key "trainings", "fields"
   add_foreign_key "trainings", "teams"
 end

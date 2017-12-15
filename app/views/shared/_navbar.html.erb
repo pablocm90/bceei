@@ -10,7 +10,9 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <%= link_to "Entrainements", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+    <% if current_player %>
+      <%= link_to "Mon equipe", team_path(current_player.team_id), class: "navbar-wagon-item navbar-wagon-link" %>
+    <% end %>
       <%= link_to "Informations", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Photos", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <!-- Avatar with dropdown menu -->
@@ -30,6 +32,14 @@
               <% end %>
             </li>
             <% end %>
+            <% if current_coach %>
+            <li>
+              <%= link_to edit_coaches_path do %>
+                <i class="fa fa-user"></i> <%= t(".diplomas", default: "Diplomas") %>
+              <% end %>
+            </li>
+            <% end %>
+
             <li>
               <%= link_to "#" do %>
                 <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
