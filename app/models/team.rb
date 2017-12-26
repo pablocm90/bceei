@@ -11,4 +11,8 @@ class Team < ApplicationRecord
   def players_ordered
     players.order(:number)
   end
+
+  def available_numbers(player)
+    (0..99).to_a - players.pluck(:number)
+  end
 end
