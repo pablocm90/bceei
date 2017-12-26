@@ -7,4 +7,12 @@ class Team < ApplicationRecord
   def players
     Player.where(team_id: self.id)
   end
+
+  def players_ordered
+    players.order(:number)
+  end
+
+  def available_numbers(player)
+    (0..99).to_a - players.pluck(:number)
+  end
 end

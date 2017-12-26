@@ -83,9 +83,11 @@ CoachFunction.all.each do |coach|
 end
 
 p "conecting players to team"
-
+counter = 1
 Player.all.each do |player|
   player.team_id = team.id
+  player.number = counter
+  counter += 1
   player.save!
 end
 

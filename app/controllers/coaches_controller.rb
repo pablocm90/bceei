@@ -7,7 +7,7 @@ class CoachesController < ApplicationController
 
   def update
     authorize @coach
-    current_coach.diplomas = coach_params(:diplomas)
+    current_coach.update(coach_params)
     if current_player.save
       redirect_to root_path
     else
@@ -22,7 +22,7 @@ class CoachesController < ApplicationController
   end
 
   def coach_params
-    params.require(:coach).permit(:diplomas)
+    params.require(:coach).permit(:diplome)
   end
 
 end
