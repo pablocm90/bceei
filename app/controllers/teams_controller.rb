@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   def show
     authorize @team
     @coaches = coaches(@team)
-    @players = @team.players
+    @players = @team.players_ordered
 
   end
 

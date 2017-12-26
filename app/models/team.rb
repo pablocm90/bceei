@@ -7,4 +7,8 @@ class Team < ApplicationRecord
   def players
     Player.where(team_id: self.id)
   end
+
+  def players_ordered
+    players.order(:number)
+  end
 end

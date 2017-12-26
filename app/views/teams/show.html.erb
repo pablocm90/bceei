@@ -11,12 +11,25 @@
       <% end %>
     </ul>
   </div>
-  <div class="players">
-    <ul class="">
-    <% @players.each do |player| %>
-      <li><%= player.user.f_name %> <%= player.user.l_name %></li>
-    <% end %>
-    </ul>
+  <div class="">
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Number</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @players.each do |player| %>
+          <tr>
+            <th scope="row"><%= player.number  %></th>
+            <td><%= player.user.f_name  %></td>
+            <td><%= player.user.l_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 </div>
