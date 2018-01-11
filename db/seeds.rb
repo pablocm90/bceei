@@ -9,11 +9,11 @@
 
 p "erasing everything"
 User.delete_all
+CoachFunction.delete_all
 Coach.delete_all
 Player.delete_all
 Menage.delete_all
 Parent.delete_all
-CoachFunction.delete_all
 Team.delete_all
 
 p "creating 20 users 1/5 are parents - 1 is a coach - 1 is an admin - 1 is coach player parent and admin"
@@ -62,13 +62,10 @@ p "creating coaching staff"
 first_coach = Coach.first
 second_coach = Coach.last
 
-assistant = CoachFunction.create(coach_role: "assistant")
-head_coach = CoachFunction.create(coach_role: "head coach")
-
-first_coach.coach_function_id = assistant.id
-second_coach.coach_function_id = head_coach.id
-first_coach.save
-second_coach.save
+assistant = CoachFunction.create(coach_role: "assistant", coach_id: first_coach.id)
+head_coach = CoachFunction.create(coach_role: "head coach", coach_id: second_coach.id)
+assistant.save
+head_coach.save
 
 p "creating team"
 

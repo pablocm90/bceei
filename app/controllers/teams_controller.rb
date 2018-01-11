@@ -18,18 +18,18 @@ class TeamsController < ApplicationController
 
   def coaches(team)
     coaching_staff = {}
-    coaching_staff[:head_coach] = Coach.where(coach_function_id: coaching_staff_functions(team)[0])
+    coaching_staff[:head_coach] = Coach.find(coaching_staff_functions(team)[0])
     coaching_staff[:assistants] = []
     coaching_staff_functions(team).drop(1).each do |ass_coach|
-      coaching_staff[:assistants] << Coach.where(coach_function_id: ass_coach)
+      coaching_staff[:assistants] << Coach.find(ass_coach)
     end
     coaching_staff
   end
 
   def coaching_staff_functions(team)
     team_coaches = CoachFunction.where(team_id: team.id)
-    head_coach_functions = team_coaches.where(coach_role: "head coach").pluck(:id)
-    assistant_coach_functions = team_coaches.where(coach_role: "assistant").pluck(:id)
+    head_coach_functions = team_coaches.where(coach_role: "head coach").pluck(:coach_id)
+    assistant_coach_functions = team_coaches.where(coach_role: "assistant").pluck(:coach_id)
     function_id = []
     function_id << head_coach_functions
     function_id << assistant_coach_functions

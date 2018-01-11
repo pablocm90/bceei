@@ -24,14 +24,14 @@ class User < ApplicationRecord
       self.save
     end
     if is_player
-      player = Player.new()
+      player = Player.create()
       self.player = player
-      self.save
+      self.save!
     end
     if is_coach
-      coach = Coach.new()
+      coach = Coach.create()
       self.coach = coach
-      self.save
+      self.save!
     end
   end
 

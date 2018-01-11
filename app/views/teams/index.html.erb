@@ -11,7 +11,7 @@
     <% end %>
       <ul class="list list-inline">
         <% team.coach_functions.each do |coach| %>
-        <li> <%= coach.coaches.first.user.f_name %> <%= coach.coach_role %> </li>
+        <li> <%= Coach.find(coach.coach_id).user.f_name %> <%= coach.coach_role %> </li>
         <li>   </li>
         <% end %>
       </ul>

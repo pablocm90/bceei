@@ -1,17 +1,15 @@
-<div class="team-cover" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://placebeard.it/640/480');">
 <div class="container team">
   <div id="team-name"> <h2><%= @team.name %> </h2></div>
   <div id="head-coach">
-    <h3><%= @coaches[:head_coach][0].user.f_name%> - Head Coach</h3>
+    <h3><%= @coaches[:head_coach].user.f_name%> - Head Coach</h3>
   </div>
   <div id="assistant-coaches">
     <ul class="list list-inline">
-      <%  @coaches[:assistants][0].each do |ass|%>
+      <%  @coaches[:assistants].each do |ass|%>
        <li> <h4> <%= ass.user.f_name %> - Assistant</h4></li>
       <% end %>
     </ul>
   </div>
-  <div class="">
     <table class="table table-hover table-dark">
       <thead>
         <tr>
@@ -30,6 +28,5 @@
         <% end %>
       </tbody>
     </table>
-  </div>
 </div>
 </div>
